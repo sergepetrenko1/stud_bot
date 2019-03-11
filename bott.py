@@ -4,7 +4,7 @@ import logging
 from backend import Student, convert_task
 from random import choice
 from texts import greeting, closing
-from hidden import token
+from hidden import TOKEN
 import os
 
 
@@ -92,7 +92,7 @@ def choose_test(bot, update):
 
 
 
-updater = Updater(token=token)
+updater = Updater(TOKEN)
 PORT = int(os.environ.get('PORT', '8443'))
 dp = updater.dispatcher
 cv_handler = ConversationHandler(
@@ -113,8 +113,8 @@ cv_handler = ConversationHandler(
 dp.add_handler(cv_handler)
 updater.start_webhook(listen="0.0.0.0",
                       port=PORT,
-                      url_path=token)
-updater.bot.set_webhook("https://testingbotbestintheworld.herokuapp.com/" + token)
+                      url_path=TOKEN)
+updater.bot.set_webhook("https://testingbotbestintheworld.herokuapp.com/" + TOKEN)
 updater.idle()
 
 
