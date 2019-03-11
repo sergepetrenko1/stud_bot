@@ -23,7 +23,6 @@ def start(bot, update):
     user = Student(update.message.chat['username'], update.message.chat['first_name'], update.message.chat['id'])
     STUDENTS[str(update.message.chat['id'])] = user
     user.get_tests()
-    update.message.reply_text('boy')
     if len(user.tests.keys()) > 1:
         keyboard = [[InlineKeyboardButton(str(i), callback_data='{}&{}'.format(i, user.user_id)) for i in user.tests.keys()]]
         reply_markup = InlineKeyboardMarkup(keyboard)
@@ -45,8 +44,7 @@ def start(bot, update):
                 reply_markup = InlineKeyboardMarkup(keyboard)
                 update.message.reply_text(task_text, reply_markup=reply_markup)
                 return ANSWER
-
-    else:
+    elif not user.tests:
         update.message.reply_text(closing)
     return ANSWER
 
