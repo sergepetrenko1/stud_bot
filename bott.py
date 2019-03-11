@@ -27,7 +27,7 @@ def start(bot, update):
     if len(user.tests.keys()) > 1:
         keyboard = [[InlineKeyboardButton(str(i), callback_data='{}&{}'.format(i, user.user_id)) for i in user.tests.keys()]]
         reply_markup = InlineKeyboardMarkup(keyboard)
-        update.message.reply_text('text', reply_markup=reply_markup)
+        update.message.reply_text('Choose Test', reply_markup=reply_markup)
 
         return CHOOSE_TEST
 
