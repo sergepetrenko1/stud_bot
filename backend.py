@@ -29,7 +29,7 @@ class Student:
         data = response.json()
         for usr in data:
             if usr['telegram_id'] == str(self.user_id):
-                self.id = usr['id']
+                self.idid = usr['id']
                 self.json_tests = usr['tests']
 
                 return None
@@ -45,7 +45,7 @@ class Student:
         data = response.json()
         for usr in data:
             if usr['telegram_id'] == str(self.user_id):
-                self.id = usr['id']
+                self.idid = usr['id']
                 self.json_tests = usr['tests']
 
     def update_grade(self, point):
@@ -64,7 +64,7 @@ class Student:
             "telegram_username": self.username,
             "telegram_id": self.user_id,
             "tests": self.json_tests}
-        requests.put(DJ_URL+'/studs/student/{}/'.format(self.id), json=submit_data)
+        requests.put(DJ_URL+'/studs/student/{}/'.format(self.idid), json=submit_data)
         self.tests_for_grade = []
 
     def __str__(self):

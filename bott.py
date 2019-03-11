@@ -28,22 +28,22 @@ def start(bot, update):
         reply_markup = InlineKeyboardMarkup(keyboard)
         update.message.reply_text('text', reply_markup=reply_markup)
         return CHOOSE_TEST
-    else:
+    elif len(user.tests.keys()) == 1:
         for key in user.tests.keys():
             user.current_test = key
         cur_test = user.current_test
 
-    for key in user.tests[cur_test].keys():
-        if user.tests[cur_test][key]:
-            task = choice(user.tests[cur_test][key])
-            task_text, choices_points = convert_task(key, task)
-            user.tests[cur_test][key].remove(task)
-            keyboard = [
-                [InlineKeyboardButton(i[0], callback_data='{}&{}'.format(i[1], user.user_id)) for i
-                 in choices_points]]
-            reply_markup = InlineKeyboardMarkup(keyboard)
-            update.message.reply_text(task_text, reply_markup=reply_markup)
-            return ANSWER
+        for key in user.tests[cur_test].keys():
+            if user.tests[cur_test][key]:
+                task = choice(user.tests[cur_test][key])
+                task_text, choices_points = convert_task(key, task)
+                user.tests[cur_test][key].remove(task)
+                keyboard = [
+                    [InlineKeyboardButton(i[0], callback_data='{}&{}'.format(i[1], user.user_id)) for i
+                     in choices_points]]
+                reply_markup = InlineKeyboardMarkup(keyboard)
+                update.message.reply_text(task_text, reply_markup=reply_markup)
+                return ANSWER
 
     else:
         update.message.reply_text(closing)
