@@ -93,7 +93,7 @@ def choose_test(bot, update):
 
 
 updater = Updater(token=token)
-PORT = int(os.environ.get('PORT', '8000'))
+PORT = int(os.environ.get('PORT', '8443'))
 dp = updater.dispatcher
 cv_handler = ConversationHandler(
          per_user=True,
