@@ -91,31 +91,31 @@ def choose_test(bot, update):
     return QUESTION
 
 
-def main():
-    updater = Updater(token=token)
-    PORT = int(os.environ.get('PORT', '8000'))
-    dp = updater.dispatcher
-    cv_handler = ConversationHandler(
-             per_user=True,
-             entry_points=[CommandHandler('start', start)],
-             states={
 
-                 CHOOSE_TEST: [CallbackQueryHandler(choose_test)],
+updater = Updater(token=token)
+PORT = int(os.environ.get('PORT', '8000'))
+dp = updater.dispatcher
+cv_handler = ConversationHandler(
+         per_user=True,
+         entry_points=[CommandHandler('start', start)],
+         states={
 
-                 ANSWER: [CallbackQueryHandler(button)],
+             CHOOSE_TEST: [CallbackQueryHandler(choose_test)],
 
-                 QUESTION: [MessageHandler(Filters.text, send_question), CommandHandler('start', start)],
+             ANSWER: [CallbackQueryHandler(button)],
 
-             },
-             fallbacks=[ConversationHandler.END]
-         )
+             QUESTION: [MessageHandler(Filters.text, send_question), CommandHandler('start', start)],
 
-    dp.add_handler(cv_handler)
-    updater.start_webhook(listen="0.0.0.0",
-                          port=PORT,
-                          url_path=token)
-    updater.bot.set_webhook("https://testingbotbestintheworld.herokuapp.com/" + token)
-    updater.idle()
+         },
+         fallbacks=[ConversationHandler.END]
+     )
+
+dp.add_handler(cv_handler)
+updater.start_webhook(listen="0.0.0.0",
+                      port=PORT,
+                      url_path=token)
+updater.bot.set_webhook("https://testingbotbestintheworld.herokuapp.com/" + token)
+updater.idle()
 
 
-main()
+
