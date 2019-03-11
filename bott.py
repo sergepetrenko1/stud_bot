@@ -23,11 +23,14 @@ def start(bot, update):
     user = Student(update.message.chat['username'], update.message.chat['first_name'], update.message.chat['id'])
     STUDENTS[str(update.message.chat['id'])] = user
     user.get_tests()
+
     if len(user.tests.keys()) > 1:
         keyboard = [[InlineKeyboardButton(str(i), callback_data='{}&{}'.format(i, user.user_id)) for i in user.tests.keys()]]
         reply_markup = InlineKeyboardMarkup(keyboard)
         update.message.reply_text('text', reply_markup=reply_markup)
+
         return CHOOSE_TEST
+
     elif len(user.tests.keys()) == 1:
         for key in user.tests.keys():
             user.current_test = key
@@ -45,8 +48,8 @@ def start(bot, update):
                 update.message.reply_text(task_text, reply_markup=reply_markup)
                 return ANSWER
     elif not user.tests:
-        update.message.reply_text(closing)
-    return ANSWER
+        update.message.reply_text('No tests')
+        return ANSWER
 
 
 def button(bot, update):
