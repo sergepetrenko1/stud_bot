@@ -1,7 +1,7 @@
 import requests
 import datetime
 import random
-from hidden import dj_url
+from hidden import DJ_URL
 
 
 class Student:
@@ -14,7 +14,7 @@ class Student:
         self.current_test = None
 
     def get_tests(self):
-        response = requests.get(dj_url + '/testing/')
+        response = requests.get(DJ_URL + '/testing/')
         data = response.json()
         for i in data:
             if in_future(i["test_opening_date"], i["test_closing_date"]) or i['all_time_opened']:
@@ -25,7 +25,7 @@ class Student:
                 self.tests_for_grade = [i["test_name"], 0]
 
     def get_user_id_or_create(self):
-        response = requests.get(dj_url+'/studs/student/')
+        response = requests.get(DJ_URL+'/studs/student/')
         data = response.json()
         for usr in data:
             if usr['telegram_id'] == str(self.user_id):
@@ -40,8 +40,8 @@ class Student:
             "telegram_id": self.user_id,
             "tests": []
         }
-        requests.post(dj_url+'/studs/student/', json=submit_data)
-        response = requests.get(dj_url+'/studs/student/')
+        requests.post(DJ_URL+'/studs/student/', json=submit_data)
+        response = requests.get(DJ_URL+'/studs/student/')
         data = response.json()
         for usr in data:
             if usr['telegram_id'] == str(self.user_id):
@@ -64,7 +64,7 @@ class Student:
             "telegram_username": self.username,
             "telegram_id": self.user_id,
             "tests": self.json_tests}
-        requests.put(dj_url+'/studs/student/{}/'.format(self.id), json=submit_data)
+        requests.put(DJ_URL+'/studs/student/{}/'.format(self.id), json=submit_data)
         self.tests_for_grade = []
 
     def __str__(self):
