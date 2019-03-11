@@ -109,8 +109,10 @@ def main():
          )
 
     dp.add_handler(cv_handler)
-    updater.start_polling()
-
+    updater.start_webhook(listen="0.0.0.0",
+                          port=8000,
+                          url_path=token)
+    updater.bot.set_webhook("https://testingbotbestintheworld.herokuapp.com/" + TOKEN)
     updater.idle()
 
 
