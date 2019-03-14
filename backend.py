@@ -14,6 +14,7 @@ class Student:
         self.current_test = None
 
     def get_tests(self):
+        self.tests = {}
         response = requests.get(DJ_URL + '/testing/')
         data = response.json()
         for i in data:
