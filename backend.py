@@ -55,10 +55,16 @@ class Student:
     def submit_test(self):
         self.get_user_id_or_create()
         print(self.tests_for_grade)
-        self.json_tests.append({
-            "test_name" : self.tests_for_grade[0],
-            "points_for_test" : self.tests_for_grade[1]
-        })
+        if self.json_tests:
+            self.json_tests.append({
+                "test_name" : self.tests_for_grade[0],
+                "points_for_test" : self.tests_for_grade[1]
+            })
+        else:
+            self.json_tests = [{
+                "test_name" : self.tests_for_grade[0],
+                "points_for_test" : self.tests_for_grade[1]
+            }]
 
         submit_data = {
             "name":self.user_first_name,
