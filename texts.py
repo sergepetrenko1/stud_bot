@@ -1,2 +1,2 @@
 greeting = 'Are you ready?'
-closing = 'No questions left'
+closing = 'You have completed the test'
